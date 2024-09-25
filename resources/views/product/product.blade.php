@@ -44,4 +44,21 @@
 
 
     </form>
+
+    <hr>
+    <hr>
+
+    <h1>This is the product list ( you have {{ $products->count() }} products) </h1> <br> <br>
+
+    @foreach ($products as $product)
+        <div>
+            <h2>{{ $product->name }}</h2>
+            <h3>{{ $product->description }}</h3>
+            <h5> price : {{ $product->price }}</h5>
+            <h3> stock : {{ $product->stock }}</h3>
+            <h3> size : {{ $product->size }}</h3>
+        </div>
+        <hr>
+        <hr><br>
+    @endforeach
 @endsection
