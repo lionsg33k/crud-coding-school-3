@@ -58,6 +58,7 @@
             <h3> stock : {{ $product->stock }}</h3>
             <h3> size : {{ $product->size }}</h3>
             <a href="/product/show/{{ $product->id }}">Show Product</a> <br> <br>
+            <a href="/product/edit/{{ $product->id }}">Click to edit Product</a> <br> <br>
 
             <form action="/product/destroy/{{ $product->id }}" method="post">
                 @csrf

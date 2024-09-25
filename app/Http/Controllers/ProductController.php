@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -57,7 +58,7 @@ class ProductController extends Controller
     {
         //
 
-        return view("product.partials.show" , compact("product"));
+        return view("product.partials.show", compact("product"));
     }
 
     /**
@@ -66,6 +67,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         //
+        return view("product.partials.edit", compact('product'));
     }
 
     /**
@@ -74,6 +76,34 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+        request()->validate([
+            "name" => "required|max:100",
+            "description" => "required|max:500",
+            "price" => "required|integer|min:0",
+            "stock" => "required|integer|min:0",
+            "size" => "required|in:s,m,l"
+        ]);
+
+        // * method  1
+
+        // $product->name = $request->name;
+        // $product->description = $request->description;
+        // $product->price = $request->price;
+        // $product->stock = $request->stock;
+        // $product->size = $request->size;
+        // $product->save();
+
+        // * method 2
+        
+        $product->update([
+            "name" => $request->name,
+            "description" => $request->description,
+            "price" => $request->price,
+            "stock" => $request->stock,
+            "size" => $request->size,
+        ]);
+
+        return back();
     }
 
     /**
