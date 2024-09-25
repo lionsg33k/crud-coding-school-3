@@ -57,6 +57,7 @@
             <h5> price : {{ $product->price }}</h5>
             <h3> stock : {{ $product->stock }}</h3>
             <h3> size : {{ $product->size }}</h3>
+            <a href="/product/show/{{ $product->id }}">Show Product</a>
         </div>
         <hr>
         <hr><br>

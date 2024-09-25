@@ -15,4 +15,5 @@ Route::post("/student/store", [StudentController::class, "store"])->name("studen
 // * products
 
 Route::get("/products", [ProductController::class, "index"])->name("products");
-Route::post("/products/store" , [ProductController::class ,"store"])->name("products.store");
+Route::post("/products/store", [ProductController::class, "store"])->name("products.store");
+Route::get("/product/show/{product}", [ProductController::class, "show"])->name("products.show");

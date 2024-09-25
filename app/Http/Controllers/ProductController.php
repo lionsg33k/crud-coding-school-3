@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
-        return view("product.product" , compact("products"));
+        return view("product.product", compact("products"));
     }
 
     /**
@@ -56,6 +56,8 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+
+        return view("product.partials.show" , compact("product"));
     }
 
     /**
@@ -80,5 +82,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+
     }
 }
