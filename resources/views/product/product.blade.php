@@ -57,7 +57,13 @@
             <h5> price : {{ $product->price }}</h5>
             <h3> stock : {{ $product->stock }}</h3>
             <h3> size : {{ $product->size }}</h3>
-            <a href="/product/show/{{ $product->id }}">Show Product</a>
+            <a href="/product/show/{{ $product->id }}">Show Product</a> <br> <br>
+
+            <form action="/product/destroy/{{ $product->id }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit">Delete Product</button>
+            </form>
         </div>
         <hr>
         <hr><br>
