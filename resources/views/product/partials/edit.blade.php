@@ -1,7 +1,7 @@
 @extends('layouts.index')
 
 @section('content')
-    <h1>You are editing {{ $product->name }}</h1>
+    <h1>You are <span class="text-red-900 bg-black">editing</span> {{ $product->name }}</h1>
 
 
     <form action="/product/update/{{ $product->id }}" method="post">
