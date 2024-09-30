@@ -28,3 +28,14 @@ myBtns.forEach(btn => {
 
 });
 
+
+let readBtn = document.querySelectorAll(".markAsRead")
+
+readBtn.forEach((btn) => {
+
+    btn.addEventListener("change" , () => {
+        btn.nextElementSibling.click()
+        
+    })
+    
+})

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
@@ -32,3 +33,11 @@ Route::get("/todo", [TodoController::class, "index"])->name("todo");
 Route::post("/todo/store", [TodoController::class, "store"])->name("todo.store");
 Route::put("/todo/update/{todo}", [TodoController::class, "update"])->name("todo.update");
 Route::delete("/todo/destroy/{todo}", [TodoController::class, "destroy"])->name("todo.destroy");
+
+//* contact us email form
+
+Route::get("/contact-us" , [ContactController::class , "index"])->name("contact-us");
+Route::get("/contact/mail" , [ContactController::class , "mailDashboard"])->name("contact.mail");
+Route::post("/contact-us/store", [ContactController::class, "store"])->name("contact-us.store");
+Route::put("/contact/mail/update/{contact}", [ContactController::class, "update"])->name("contact-us.update");
+Route::delete("/contact/mail/destroy/{contact}", [ContactController::class, "destroy"])->name("contact-us.destroy");
