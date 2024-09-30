@@ -1,10 +1,10 @@
 @extends('layouts.index')
 
 @section('content')
-    <div class="h-screen bg-[#64ccc5] flex items-center justify-center">
+    <div class="h-screen heroMail    flex items-center justify-center">
 
 
-        <div class="contact flex w-[70%] h-[80%] bg-[#04364a] rounded-2xl">
+        <div class="contact flex w-[70%] h-[80%] bg-[#04364a]/80 rounded-2xl">
 
             <div class="left w-[43%] px-8 flex flex-col  justify-center gap-y-16 h-full font-serif">
                 <h1 class="text-white text-4xl leading-10  w-full">Lets Talk on Something <span class="text-[#61c7c1]">Great</span> Together</h1>
@@ -40,27 +40,27 @@
                     <div class=" flex flex-col items-start gap-y-2 mt-2">
                         <label class="text-[#176b87] font-extrabold" for="">Name</label>
                         <input name="name"
-                            class="border-b border-gray-400 px-2 focus:border-b  focus:outline-none w-full" required
+                            class="border-b border-gray-400 h-8 px-2 focus:border-b  focus:outline-none w-full" required
                             type="text" placeholder="Insert a valid name">
                     </div>
 
                     <div class=" flex flex-col items-start gap-y-2 mt-2">
                         <label class="text-[#176b87] font-extrabold" for="">Email</label>
                         <input name="email"
-                            class="border-b border-gray-400 px-2 focus:border-b  focus:outline-none w-full" required
+                            class="border-b border-gray-400 h-8 px-2 focus:border-b  focus:outline-none w-full" required
                             type="email" placeholder="Insert a valid email">
                     </div>
 
                     <div class=" flex flex-col items-start gap-y-2 mt-2">
                         <label class="text-[#176b87] font-extrabold" for="">Phone number</label>
                         <input name="phone"
-                            class="border-b border-gray-400 px-2 focus:border-b  focus:outline-none w-full" required
+                            class="border-b border-gray-400 h-8 px-2 focus:border-b  focus:outline-none w-full" required
                             type="text" placeholder="Insert a valid Phone Number">
                     </div>
 
                     <div class=" flex flex-col items-start gap-y-2 mt-2">
                         <label class="text-[#176b87] font-extrabold" for="">Message</label>
-                        <textarea class="border border-gray-400 w-full" required placeholder="Inseret a valid message" name="message"
+                        <textarea class="border border-gray-400 w-full p-2" required placeholder="Inseret a valid message" name="message"
                             id=""></textarea>
 
                     </div>
@@ -77,7 +77,7 @@
                         </select>
                     </div>
 
-                    <button class=" bg-[#176b87] text-white w-full py-2 rounded-full" type="submit">Send </button>
+                    <button class=" bg-[#176b87] text-white w-full py-2.5 rounded-full" type="submit">Send </button>
                 </form>
 
 

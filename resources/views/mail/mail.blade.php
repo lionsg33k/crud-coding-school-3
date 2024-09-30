@@ -2,35 +2,38 @@
 
 
 @section('content')
-    <div class="h-screen bg-[#04364a]">
+    <div class="h-screen heroMail bg-[#04364a]">
         @include('mail.partials.navbar')
 
         <div class="h-24 border-b border-white px-5">
 
-<form class="flex items-center gap-x-5" action="">
+            <form class="flex items-center gap-x-5" action="/contact/mail/filter" method="post">
+                @csrf
 
-    <select class="w-1/4 p-2  border-white" name="priority" id="">
-        <option selected value="all">All</option>
-        <option selected value="high">High</option>
-        <option selected value="medium">Medium</option>
-        <option selected value="low">Low</option>
-    </select>
 
-    <select class="w-1/4 p-2  border-white" name="dateSort" id="">
-        <option selected value="latestFirst">Latest First</option>
-        <option selected value="oldestFirst">Oldest First</option>
+                <select class="w-1/4 p-2  border-white" name="priority" id="">
+                    <option selected value="all">All</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
 
-    </select>
+                <select class="w-1/4 p-2  border-white" name="dateSort" id="">
+                    <option selected value="latestFirst">Latest First</option>
+                    <option selected value="oldestFirst">Oldest First</option>
 
-    <button class="text-white bg-[#176b87] py-2  w-1/6" type="submit">Sort</button>
-</form>
+                </select>
+
+                <button class="text-white bg-[#176b87] py-2  w-1/6" type="submit">Sort</button>
+            </form>
         </div>
 
 
-        <div class="">
+        <div class=" h-[75vh] overflow-y-auto">
 
             @foreach ($mails as $mail)
-                <div class=" py-4 border-b border-white px-5 flex  items-center justify-between gap-5">
+                <div
+                    class=" py-4 border-b {{ $mail->read ? 'bg-black/50' : 'bg-black/80' }} border-white px-5 flex  items-center justify-between gap-5">
 
 
 

@@ -18,10 +18,36 @@ class ContactController extends Controller
     }
 
 
-    public function mailDashboard()
+    public function mailDashboard(Request $request)
+    {
+        // dd($request);
+        $mails = Contact::all();
+        return view("mail.mail", compact("mails"));
+    }
+
+    public function filter(Request $request)
     {
 
-        $mails = Contact::all();
+        $filtredPriority = $request->priority;
+        $sortedDate = $request->dateSort;
+
+        $query = Contact::query();
+
+
+        if ($filtredPriority != "all") {
+            $query->where("priority", $filtredPriority);
+        }
+
+
+        if ($sortedDate == "latestFirst") {
+            $query->orderBy("created_at", "desc");
+        } else {
+            $query->orderBy("created_at", "asc");
+        }
+
+        $mails = $query->get();
+
+
         return view("mail.mail", compact("mails"));
     }
 

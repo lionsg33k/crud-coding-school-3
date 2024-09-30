@@ -38,6 +38,7 @@ Route::delete("/todo/destroy/{todo}", [TodoController::class, "destroy"])->name(
 
 Route::get("/contact-us" , [ContactController::class , "index"])->name("contact-us");
 Route::get("/contact/mail" , [ContactController::class , "mailDashboard"])->name("contact.mail");
+Route::post("/contact/mail/filter" , [ContactController::class , "filter"])->name("contact.filter");
 Route::post("/contact-us/store", [ContactController::class, "store"])->name("contact-us.store");
 Route::put("/contact/mail/update/{contact}", [ContactController::class, "update"])->name("contact-us.update");
 Route::delete("/contact/mail/destroy/{contact}", [ContactController::class, "destroy"])->name("contact-us.destroy");
