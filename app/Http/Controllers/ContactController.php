@@ -124,4 +124,8 @@ class ContactController extends Controller
         $contact->delete();
         return back();
     }
+
+
+
+    
 }

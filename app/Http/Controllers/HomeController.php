@@ -13,4 +13,6 @@ class HomeController extends Controller
         $students = Student::all();
         return view("home.home", compact("students"));
     }
+
+
 }

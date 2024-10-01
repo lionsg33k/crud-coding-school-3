@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
@@ -36,9 +37,17 @@ Route::delete("/todo/destroy/{todo}", [TodoController::class, "destroy"])->name(
 
 //* contact us email form
 
-Route::get("/contact-us" , [ContactController::class , "index"])->name("contact-us");
-Route::get("/contact/mail" , [ContactController::class , "mailDashboard"])->name("contact.mail");
-Route::post("/contact/mail/filter" , [ContactController::class , "filter"])->name("contact.filter");
+Route::get("/contact-us", [ContactController::class, "index"])->name("contact-us");
+Route::get("/contact/mail", [ContactController::class, "mailDashboard"])->name("contact.mail");
+Route::post("/contact/mail/", [ContactController::class, "filter"])->name("contact.filter");
 Route::post("/contact-us/store", [ContactController::class, "store"])->name("contact-us.store");
 Route::put("/contact/mail/update/{contact}", [ContactController::class, "update"])->name("contact-us.update");
 Route::delete("/contact/mail/destroy/{contact}", [ContactController::class, "destroy"])->name("contact-us.destroy");
+
+
+//* image crud
+
+Route::get("/profile", [ProfileController::class, "index"])->name("profile");
+Route::post("/profile/store", [ProfileController::class, "store"]);
+Route::put("/profile/update/{profile}", [ProfileController::class, "update"])->name("profile.update");
+Route::delete('/profile/destroy/{profile}', [ProfileController::class, 'destroy'])->name('profile.destroy');

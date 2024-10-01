@@ -1,3 +1,4 @@
+import axios from 'axios';
 import './bootstrap';
 
 
@@ -33,9 +34,25 @@ let readBtn = document.querySelectorAll(".markAsRead")
 
 readBtn.forEach((btn) => {
 
-    btn.addEventListener("change" , () => {
+    btn.addEventListener("change", () => {
         btn.nextElementSibling.click()
-        
+
     })
-    
+
 })
+
+
+let imageUpdateInputs = document.querySelectorAll(".imageUpdateInputs")
+
+imageUpdateInputs.forEach(inp => {
+
+
+    inp.addEventListener("change", (e) => {
+
+        inp.nextElementSibling.click()
+
+    })
+
+
+});
+
