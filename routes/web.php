@@ -49,5 +49,6 @@ Route::delete("/contact/mail/destroy/{contact}", [ContactController::class, "des
 
 Route::get("/profile", [ProfileController::class, "index"])->name("profile");
 Route::post("/profile/store", [ProfileController::class, "store"]);
+Route::post("/profile/url/store", [ProfileController::class, "urlStore"]);
 Route::put("/profile/update/{profile}", [ProfileController::class, "update"])->name("profile.update");
 Route::delete('/profile/destroy/{profile}', [ProfileController::class, 'destroy'])->name('profile.destroy');

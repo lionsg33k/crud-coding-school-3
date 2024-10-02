@@ -1,13 +1,22 @@
 @extends('layouts.index')
 
 @section('content')
-    <div class="py-3  flex items-center justify-center">
+    <div class="py-3  flex items-center justify-center gap-x-72">
 
         <form enctype="multipart/form-data" method="post" action="/profile/store">
             @csrf
             <input name="file" accept="image/png,jpg" type="file">
             <button type="submit">Save</button>
         </form>
+
+
+        <form  method="post" action="/profile/url/store">
+            @csrf
+            <input class="border-2 px-3 border-black" placeholder="Insert a valid URL" name="url" accept="image/png,jpg" type="url">
+            <button type="submit">Save</button>
+        </form>
+
+
     </div>
 
     <hr>

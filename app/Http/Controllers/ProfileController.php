@@ -59,6 +59,29 @@ class ProfileController extends Controller
         return back();
     }
 
+    public function urlStore(Request $request)
+    {
+        request()->validate([
+            "url" => "required|url"
+        ]);
+
+        $file = file_get_contents($request->url);
+
+        // parse_url($request->url , PHP_URL_PATH)  ====   "findyours-php/viewfinder/images/res70/469000/469963-Hassan-Ii-Mosque.jpg"
+
+        $extension =  pathinfo(parse_url($request->url, PHP_URL_PATH), PATHINFO_EXTENSION);
+
+        $fileName = hash("sha256", $file) . "." . $extension;
+
+        Storage::disk("public")->put("images/" . $fileName, $file);
+
+        Profile::create([
+            "name" => $fileName
+        ]);
+        return back();
+    }
+
+
     /**
      * Display the specified resource.
      */
