@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+use function PHPUnit\Framework\fileExists;
 
 class ProductController extends Controller
 {
@@ -33,20 +36,27 @@ class ProductController extends Controller
     {
         //
         request()->validate([
-            "name" => "required|max:100",
-            "description" => "required|max:500",
+            "name" => "required",
             "price" => "required|integer|min:0",
-            "stock" => "required|integer|min:0",
-            "size" => "required|in:s,m,l"
+            "stock"  => "required|integer|min:0",
+            "category" => "required|in:men,women,child|",
+            "image" => "required|image|max:3072"
         ]);
+
+        $file =  file_get_contents($request->image);
+
+        $fileName = hash("sha256", $file) . "." . $request->image->getClientOriginalExtension();
+
+        Storage::disk("public")->put("images/" . $fileName, $file);
 
         Product::create([
             "name" => $request->name,
-            "description" => $request->description,
             "price" => $request->price,
             "stock" => $request->stock,
-            "size" => $request->size,
+            "category" => $request->category,
+            "image" => $fileName
         ]);
+
 
         return back();
     }
@@ -57,8 +67,41 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         //
+        $products = Product::all();
 
-        return view("product.partials.show", compact("product"));
+        return view("product.partials.show", compact("products"));
+    }
+
+
+    public function filtredProduct(Request $request)
+    {
+
+        request()->validate([
+            "category" => "required|in:men,women,child,all",
+            "price" => "required|in:random,expensive,cheap"
+        ]);
+        $filterCategory = $request->category;
+        $filterPrice = $request->price;
+
+        // dd($request->all());
+
+        $query = Product::query();
+
+        // - 1 -> column    2 -> asc  desc
+
+        if ($filterPrice != "random") {
+            $query->orderBy("price", $filterPrice == "expensive" ? "desc" : "asc");
+        }
+
+        if ($filterCategory != "all") {
+            $query->where("category", $filterCategory);
+        }
+
+
+        $products =  $query->get();
+
+
+        return view("product.partials.show", compact("products"));
     }
 
     /**
@@ -76,31 +119,28 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         //
+
         request()->validate([
-            "name" => "required|max:100",
-            "description" => "required|max:500",
+            "name" => "required",
             "price" => "required|integer|min:0",
-            "stock" => "required|integer|min:0",
-            "size" => "required|in:s,m,l"
+            "stock"  => "required|integer|min:0",
+            "category" => "required|in:men,women,child|",
         ]);
 
-        // * method  1
+        if ($request->hasFile("image")) {
+            $path = storage_path('app/public/images/' . $product->image);
+            if (file_exists($path)) {
+                unlink($path);
+                $request->image->move(storage_path("app/public/images/"), $product->image);
+            }
+        }
 
-        // $product->name = $request->name;
-        // $product->description = $request->description;
-        // $product->price = $request->price;
-        // $product->stock = $request->stock;
-        // $product->size = $request->size;
-        // $product->save();
 
-        // * method 2
-        
         $product->update([
             "name" => $request->name,
-            "description" => $request->description,
             "price" => $request->price,
             "stock" => $request->stock,
-            "size" => $request->size,
+            "category" => $request->category,
         ]);
 
         return back();

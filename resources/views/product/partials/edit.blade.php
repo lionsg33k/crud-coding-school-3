@@ -1,53 +1,60 @@
-@extends('layouts.index')
+<div class="modal fade" id="updateModal{{ $product->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Insert Product</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-@section('content')
-    <h1>You are <span class="text-red-900 bg-black">editing</span> {{ $product->name }}</h1>
+                <form enctype="multipart/form-data" action="{{ route("product.update" , $product->id) }}" method="post">
+
+                    @csrf @method("PUT")
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product name</label>
+                        <input value="{{ old("name" , $product->name) }}" name="name" type="text" class="form-control" id="exampleInputEmail1"
+                            placeholder="Insert a valid Product name" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Product price</label>
+                        <input value="{{ old("price" , $product->price) }}" name="price" min="0" type="number" class="form-control" id="exampleInputEmail1"
+                            placeholder="Insert a valid Product price" aria-describedby="emailHelp">
+                    </div>
+                    <div  class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Items in Stock</label>
+                        <input value="{{ old("stock" , $product->stock) }}" name="stock" type="number" min="0" class="form-control" id="exampleInputEmail1"
+                            placeholder="How many item on stock ?" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+
+                        <div class="mb-3">
+
+                            <label for="exampleInputEmail1" class="form-label">Product Category</label>
+
+                            <select name="category" class="form-control" id="exampleInputEmail1"
+                                placeholder="Insert a Valid Product name" aria-describedby="emailHelp">
+                                <option @selected($product->category == "men") value="men">Men</option>
+                                <option @selected($product->category == "women") value="women">Women</option>
+                                <option @selected($product->category == "child") value="child">Child</option>
+                            </select>
 
 
-    <form action="/product/update/{{ $product->id }}" method="post">
-        @csrf
-        @method("PUT")
 
-        <div>
-            <label for="">name</label> :
-            <input value="{{ old('name', $product->name) }}" name="name" required type="text"
-                placeholder="please insert a valid Product name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Product Image</label>
+                            <input name="image" accept="image/*" type="file" class="form-control"
+                                id="exampleInputEmail1" placeholder="Insert a Valid Product name"
+                                aria-describedby="emailHelp">
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="px-5 rounded-lg py-2 bg-alpha" type="submit" class="bg-alpha">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <br><br>
-
-        <div>
-            <label for="">description</label> :
-            <input value="{{ old('description', $product->description) }}" name="description" required type="text"
-                placeholder="please insert a valid Product description">
-        </div>
-        <br><br>
-
-        <div>
-            <label for="">price</label> :
-            <input value="{{ old('price', $product->price) }}" min="0" name="price" required type="number"
-                placeholder="please insert a valid Product price">
-        </div>
-        <br><br>
-
-
-        <div>
-            <label for="">stock</label> :
-            <input value="{{ old('stock', $product->stock) }}" min="0" name="stock" required type="number"
-                placeholder="please insert a valid Product stock">
-        </div>
-        <br><br>
-
-
-        <select name="size" id="">
-            <option selected disabled value=""> Select Product size </option>
-            <option @selected($product->size == 's') value="s">s</option>
-            <option @selected($product->size == 'm') value="m">m</option>
-            <option @selected($product->size == 'l') value="l">l</option>
-        </select>
-        <br><br>
-
-        <button type="submit">Submit</button>
-
-
-    </form>
-@endsection
+    </div>

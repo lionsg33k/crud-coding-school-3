@@ -3,18 +3,12 @@
 @section('content')
     @include('todo.partials.navbar')
 
-    {{--  create  form --}}
-    <form action="/todo/store" method="post" class=" px-[2vw] py-3 flex items-center  gap-x-10 ">
-        @csrf
-        <input placeholder="Insert Task ..." type="text" name="task"
-            class="py-2 px-2 rounded-lg w-1/3  border-2 border-black">
-        <button class=" bg-black px-10 py-2 rounded-lg text-white text-lg font-bold">Add</button>
-    </form>
+
 
 
     <div class="py-8 flex flex-wrap  gap-3   px-[2vw]">
         @foreach ($todos as $todo)
-            <div class="w-[18vw]  px-3 py-2 flex flex-col justify-between h-60  rounded-2xl" style="background-color: {{ $todo->color }}">
+            <div class="w-[18.7vw]  px-3 py-2 flex flex-col justify-between h-60  rounded-2xl" style="background-color: {{ $todo->color }}">
                 <input type="text"
                     class=" bg-transparent text-wrap focus:outline-none focus:border-none mt-3 font-semibold uiInput" readonly
                     value="{{ $todo->task }}">
