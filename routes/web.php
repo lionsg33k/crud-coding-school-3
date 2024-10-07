@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -16,17 +17,19 @@ Route::get("/student", [StudentController::class, "index"]);
 Route::post("/student/store", [StudentController::class, "store"])->name("student.store");
 
 // * products
-// ! show   view 
+
 Route::get("/products", [ProductController::class, "index"])->name("products");
 Route::get("/product/show/", [ProductController::class, "show"])->name("products.show");
 Route::get("/product/edit/{product}", [ProductController::class, "edit"])->name("products.edit");
-// ! post =  save data
 Route::post("/products/store", [ProductController::class, "store"])->name("products.store");
 Route::post("/products/filter", [ProductController::class, "filtredProduct"])->name("products.filter");
-//!  put = edit data 
 Route::put("/product/update/{product}", [ProductController::class, "update"])->name("product.update");
-// !delete  = delete data
 Route::delete("/product/destroy/{product}", [ProductController::class, "destroy"])->name("product.destroy");
+
+//^ Cart -Product
+
+Route::get("/cart", [CartController::class, "index"])->name("cart");
+Route::post("/cart/store", [CartController::class, "store"])->name("cart.store");
 
 
 //* To do list

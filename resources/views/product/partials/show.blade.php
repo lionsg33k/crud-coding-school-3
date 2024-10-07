@@ -1,14 +1,18 @@
 @extends('layouts.index')
 
 @section('content')
-    <div class="p-8">
+    <div class="p-8 flex items-center justify-between">
         <h1 class="text-2xl">All Products</h1>
+
+        <a href="{{ route('cart') }}">
+            <i class="bi bi-cart text-xl font-extrabold text-black"></i>
+        </a>
     </div>
 
     <form method="post" action="{{ route('products.filter') }}"
         class=" w-full flex items-center justify-end gap-x-5 px-[2vw] py-2">
         @csrf
-        <select  class="bg-[#f4f6f8] px-2 py-2 rounded-lg border-1 border-black/50 w-1/5" name="category" id="">
+        <select class="bg-[#f4f6f8] px-2 py-2 rounded-lg border-1 border-black/50 w-1/5" name="category" id="">
             <option selected value="all">All</option>
             <option value="men">Men</option>
             <option value="women">Women</option>
@@ -38,14 +42,14 @@
                         <p class="mb-0 absolute top-2 right-2 text-alpha  text-base font-bold bg-black px-2">
                             {{ $product->price }} $</p>
                     </div>
-
-                    <form action="">
-
+                    <form action="{{ route("cart.store") }}" method="post">
+                        @csrf
+                        <input type="hidden" name="item_id" value="{{ $product->id }}">
                         <button type="submit"
                             class="bg-alpha hover:bg-black hover:text-alpha transition px-3 py-1 rounded-lg font-semibold">Add
                             To Cart</button>
-
                     </form>
+
 
                 </div>
             </div>
