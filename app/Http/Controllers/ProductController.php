@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
+
         return view("product.product", compact("products"));
     }
 
@@ -68,8 +70,14 @@ class ProductController extends Controller
     {
         //
         $products = Product::all();
+        $cartCount = Cart::count();
 
-        return view("product.partials.show", compact("products"));
+        //* if  u dont wanna  compact all the  products  u can simply  filter  everything on ur ctrl
+
+        // $products = Product::all()->where("stock", ">", "0");
+        // dd($products);
+
+        return view("product.partials.show", compact("products" , "cartCount"));
     }
 
 

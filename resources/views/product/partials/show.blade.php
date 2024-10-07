@@ -4,8 +4,9 @@
     <div class="p-8 flex items-center justify-between">
         <h1 class="text-2xl">All Products</h1>
 
-        <a href="{{ route('cart') }}">
+        <a class="flex no-underline " href="{{ route('cart') }}">
             <i class="bi bi-cart text-xl font-extrabold text-black"></i>
+            <p class="bg-black text-alpha rounded-full text-xs w-4 h-4 flex items-center justify-center font-semibold">{{ $cartCount }}</p>
         </a>
     </div>
 
@@ -42,13 +43,21 @@
                         <p class="mb-0 absolute top-2 right-2 text-alpha  text-base font-bold bg-black px-2">
                             {{ $product->price }} $</p>
                     </div>
-                    <form action="{{ route("cart.store") }}" method="post">
-                        @csrf
-                        <input type="hidden" name="item_id" value="{{ $product->id }}">
-                        <button type="submit"
-                            class="bg-alpha hover:bg-black hover:text-alpha transition px-3 py-1 rounded-lg font-semibold">Add
-                            To Cart</button>
-                    </form>
+
+
+
+                    @if ($product->stock > 0)
+                        <form action="{{ route('cart.store') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="item_id" value="{{ $product->id }}">
+                            <button type="submit"
+                                class="bg-alpha hover:bg-black hover:text-alpha transition px-3 py-1 rounded-lg font-semibold">Add
+                                To Cart</button>
+                        </form>
+                    @else
+                        <p 
+                            class=" text-red-500 transition cursor-none mb-0 px-3 py-1 rounded-lg font-semibold">Out of stock</p>
+                    @endif
 
 
                 </div>

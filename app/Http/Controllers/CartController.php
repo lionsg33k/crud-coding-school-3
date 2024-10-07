@@ -23,6 +23,7 @@ class CartController extends Controller
             $product = Product::find($row->item_id);
 
             return (object) [
+                "id" => $row->id,
                 "product" => $product,
                 "quantity" => $row->quantity,
                 "price" => $product->price *  $row->quantity
@@ -33,7 +34,7 @@ class CartController extends Controller
             return $total +  $item->price;
         });
 
-        return view("product.cart.cart", compact("cartItems" , "totalPrice"));
+        return view("product.cart.cart", compact("cartItems", "totalPrice"));
     }
 
     /**
@@ -94,6 +95,24 @@ class CartController extends Controller
     public function update(Request $request, Cart $cart)
     {
         //
+        request()->validate([
+            "updateQuantity" => "required"
+        ]);
+
+        $product = Product::all()->where("id", $cart->item_id)->first();
+
+
+            if ($request->updateQuantity == "plus") {
+                $cart->increment("quantity");
+                $product->decrement("stock");
+            } else {
+                if ($cart->quantity > 1) {
+                    $cart->decrement("quantity");
+                    $product->increment("stock");
+                }
+            }
+
+        return back();
     }
 
     /**
@@ -102,5 +121,14 @@ class CartController extends Controller
     public function destroy(Cart $cart)
     {
         //
+        $product = Product::all()->where("id", $cart->item_id)->first();
+
+    // dd()
+        $product->stock += $cart->quantity;
+        $product->save();
+
+        $cart->delete();
+
+        return back();
     }
 }

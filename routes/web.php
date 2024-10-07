@@ -30,6 +30,8 @@ Route::delete("/product/destroy/{product}", [ProductController::class, "destroy"
 
 Route::get("/cart", [CartController::class, "index"])->name("cart");
 Route::post("/cart/store", [CartController::class, "store"])->name("cart.store");
+Route::put("/cart/update/{cart}", [CartController::class, "update"])->name("cart.update");
+Route::delete("/cart/destroy/{cart}", [CartController::class, "destroy"])->name("cart.destroy");
 
 
 //* To do list

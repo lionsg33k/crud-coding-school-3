@@ -30,45 +30,48 @@
                     <tbody>
 
                         @foreach ($cartItems as $item)
-
                             <tr valign="middle">
-                            <td class="py-3" scope="row">
-                                <div class="flex gap-x-3">
-                                    <img class="w-24 h-24 rounded-lg"
-                                        src="{{ asset("storage/images/". $item->product->image) }}"
-                                        alt="">
-                                    <div class="">
-                                        <h5 class="text-lg font-bold mb-0">{{ $item->product->name }}</h5>
-                                        <p class="mb-0 text-sm font-semibold text-gray-500">{{ $item->product->category }}</p>
+                                <td class="py-3" scope="row">
+                                    <div class="flex gap-x-3">
+                                        <img class="w-24 h-24 rounded-lg"
+                                            src="{{ asset('storage/images/' . $item->product->image) }}" alt="">
+                                        <div class="">
+                                            <h5 class="text-lg font-bold mb-0">{{ $item->product->name }}</h5>
+                                            <p class="mb-0 text-sm font-semibold text-gray-500">
+                                                {{ $item->product->category }}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
 
-                            <td class="py-3">
-                                <div
-                                    class="flex justify-center h-full  border-2 text-gray-700 rounded-lg w-1/2 px-3 items-center gap-x-5">
-                                    <form action="">
-                                        <button class="text-2xl">-</button>
+                                <td class="py-3">
+                                    <div
+                                        class="flex justify-center h-full  border-2 text-gray-700 rounded-lg w-1/2 px-3 items-center gap-x-5">
+                                        <form action="{{ route('cart.update', $item->id) }}" method="post">
+                                            @csrf @method('PUT')
+                                            <input type="hidden" name="updateQuantity" value="minus">
+                                            <button class="text-2xl">-</button>
+                                        </form>
+                                        <h3 class="mb-0 text-lg">{{ $item->quantity }}</h3>
+                                        <form action="{{ route('cart.update', $item->id) }}" method="post">
+                                            @csrf @method('PUT')
+                                            <input type="hidden" name="updateQuantity" value="plus">
+                                            <button class="text-2xl">+</button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td class="py-3"><span class="text-lg font-bold mb-0">{{ $item->price }} $</span></td>
+
+
+                                <td class="py-5">
+                                    <form action="{{ route("cart.destroy" ,  $item->id) }}" method="post">
+                                        @csrf @method("DELETE")
+                                        <button class="font-semibold text-sm">
+
+                                            <i class="bi bi-trash3-fill"></i>
+                                            Remove</button>
                                     </form>
-                                    <h3 class="mb-0 text-lg">{{ $item->quantity }}</h3>
-                                    <form action="">
-                                        <button class="text-2xl">+</button>
-                                    </form>
-                                </div>
-                            </td>
-                            <td class="py-3"><span class="text-lg font-bold mb-0">{{ $item->price }} $</span></td>
-
-
-                            <td class="py-5">
-                                <form action="">
-                                    <button class="font-semibold text-sm">
-
-                                        <i class="bi bi-trash3-fill"></i>
-                                        Remove</button>
-                                </form>
-                            </td>
-                        </tr>
-                            
+                                </td>
+                            </tr>
                         @endforeach
 
 
