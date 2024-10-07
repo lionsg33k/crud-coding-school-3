@@ -1,6 +1,6 @@
 <div class="w-1/6 bg-black h-screen flex flex-col items-center">
     <div class="logo h-[15%]  w-full flex items-center px-[1vw] ">
-        <h1 class="text-white text-3xl font-serif">Geek <span class="text-alpha">Repo</span></h1>
+        <h1 class="text-white text-3xl font-serif">Geek <span class="text-alpha">Repo</span> &copy;<span></span></h1>
     </div>
     <div class="w-full px-[1vw] flex flex-col gap-y-[5vh]">
 

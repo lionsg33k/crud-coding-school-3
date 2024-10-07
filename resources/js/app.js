@@ -56,3 +56,13 @@ imageUpdateInputs.forEach(inp => {
 
 });
 
+
+let flash = document.querySelector(".flashMsg")
+
+if (flash) {
+    setTimeout(() => {
+        closeFlash.click()
+        
+    }, 2000);
+}
+

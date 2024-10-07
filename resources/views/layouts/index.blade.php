@@ -12,10 +12,16 @@
 
 <body>
 
+
+
     <div class="flex  overflow-hidden">
         @include('layouts.sidebar')
 
         <div class="w-5/6 h-screen overflow-y-auto">
+
+           @include('layouts.flash') 
+
+
 
             @yield('content')
         </div>

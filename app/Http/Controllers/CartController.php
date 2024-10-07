@@ -70,7 +70,7 @@ class CartController extends Controller
 
         $product->decrement("stock");
 
-        return back();
+        return back()->with("success", "item hv been successfuly added  to cart");
     }
 
     /**
@@ -102,17 +102,17 @@ class CartController extends Controller
         $product = Product::all()->where("id", $cart->item_id)->first();
 
 
-            if ($request->updateQuantity == "plus") {
-                $cart->increment("quantity");
-                $product->decrement("stock");
-            } else {
-                if ($cart->quantity > 1) {
-                    $cart->decrement("quantity");
-                    $product->increment("stock");
-                }
+        if ($request->updateQuantity == "plus") {
+            $cart->increment("quantity");
+            $product->decrement("stock");
+        } else {
+            if ($cart->quantity > 1) {
+                $cart->decrement("quantity");
+                $product->increment("stock");
             }
+        }
 
-        return back();
+        return back()->with("boo", "haaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
 
     /**
@@ -123,7 +123,7 @@ class CartController extends Controller
         //
         $product = Product::all()->where("id", $cart->item_id)->first();
 
-    // dd()
+        // dd()
         $product->stock += $cart->quantity;
         $product->save();
 
